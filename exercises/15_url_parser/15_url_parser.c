@@ -12,8 +12,26 @@
 int parse_url(const char* url) {
     int err = 0;
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    char *query = strchr(url, '?');
+    if (!query) {
+        err = -1;
+        goto exit;
+    }
+    query++;
+
+    char buf[512];
+    strncpy(buf, query, sizeof(buf) - 1);
+    buf[sizeof(buf) - 1] = '\0';
+
+    char *token = strtok(buf, "&");
+    while (token != NULL) {
+        char *eq = strchr(token, '=');
+        if (eq) {
+            *eq = '\0';
+            printf("key = %s, value = %s\n", token, eq + 1);
+        }
+        token = strtok(NULL, "&");
+    }
 
 exit:
     return err;

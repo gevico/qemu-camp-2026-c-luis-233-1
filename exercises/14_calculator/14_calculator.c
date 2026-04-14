@@ -1,13 +1,9 @@
 #include <stdio.h>
 
-// TODO：定义四则运算规则
-// hint：似乎除数有一些特殊情况，需要处理
-
-// I AM NOT DONE
-int add(int a, int b) {  }
-int subtract(int a, int b) {  }
-int multiply(int a, int b) {  }
-int divide(int a, int b) {  }
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+int divide(int a, int b) { return a / b; }
 
 
 
@@ -15,9 +11,7 @@ int main() {
     int a, b;
     char op;
 
-    // TODO
-    // hint:这是一个函数指针数组，在这之前应该先定义指针
-    int ()() = {add, subtract, multiply, divide};
+    int (*operations[4])(int, int) = {add, subtract, multiply, divide};
 
     char operators[] = "+-*/";
 
@@ -36,6 +30,11 @@ int main() {
     if (index == -1) {
         printf("无效的运算符\n");
         return 1;
+    }
+
+    if (op == '/' && b == 0) {
+        printf("错误: 除数不能为零\n");
+        return 0;
     }
 
     int result = operations[index](a, b);
